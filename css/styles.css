@@ -1,12 +1,15 @@
 /* Main styles */
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&Roboto:300');
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 
 /* Variables */
 
 :root {
+  --start-game: #010E18;
   --color-win: #78CF82;
   --color-lose: #D94545;
-  --color-start: #5b85b7;
+  --color-start: #1463FF;
   --color-neutral: #445069;
   --color-neutral-light: #D2D2D2;
   --color-keys: #37474F;
@@ -14,12 +17,14 @@
   --font-size-large: 60px;
   --font-size-medium: 20px;
   --transition: all .2s ease-in-out;
+  --phrase-transition: all; 
 }
 
 /* main */
 
 * {
   box-sizing: border-box;
+  font-family: 'Lato', sans-serif;
 }
 
 body {
@@ -37,9 +42,10 @@ li, ol, ul {
 h2 {
   margin: 0;
   text-transform: uppercase;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Nunito', sans-serif;
   font-size: var(--font-size-large);
-  margin: 0;
+  /* margin: 0; */
+  letter-spacing: 0.5em;
 }
 
 button {
@@ -53,6 +59,11 @@ button {
   -webkit-transition: var(--transition);
   -o-transition: var(--transition);
   transition: var(--transition);
+}
+
+button:hover {
+  background-color: #445069;
+  color: #fff;
 }
 
 .main-container {
@@ -76,8 +87,12 @@ button {
 }
 
 /* Phrase */
+#phrase {
+  padding: 10px 50px;
+  margin: 0 auto;
+}
 
-.letter {
+.letters {
   font-size: var(--font-size-medium);
   height: 65px;
   width: 65px;
@@ -86,6 +101,9 @@ button {
   color: transparent;
   background: var(--color-neutral-light);
   border-radius: 5px;
+  -webkit-transition: var(--phrase-transition);
+  -o-transition: var(--phrase-transition);
+  transition: var(--phrase-transition);
 }
 
 .space {
@@ -94,7 +112,11 @@ button {
 
 .show {
   color: #000;
-  background-color: #76CE82;
+  background-color: #1463FF;
+  text-transform: uppercase;
+  -webkit-transition: var(--transition);
+  -o-transition: var(--transition);
+  transition: var(--transition);
 }
 
 /* Keyboard */
@@ -104,19 +126,30 @@ button {
   justify-content: center;
 }
 
-.chosen {
+.choice {
   background: var(--color-neutral);
   border-radius: 5px;
   font-size: var(--font-size-medium);
   color: #FFFFFF;
 }
 
-.btn__reset {
-  padding: 8px;
+.btn-reset {
+  padding: 15px;
   margin: 50px auto;
   background: #FFFFFF;
   border-radius: 5px;
   font-size: var(--font-size-medium);
+  text-transform: uppercase;
+}
+
+.btn-reset:hover {
+  cursor: pointer;
+  background-color: #010E18;
+  color: #fff;
+}
+
+.btn-reset:active {
+  background:#6A7987;
 }
 
 /* Overlay */
@@ -138,12 +171,16 @@ button {
   color: #FFF;
 }
 
+.title:hover {
+  color: #010E18;
+}
+
 .start {
   background-color: var(--color-start);
 }
 
 .start a {
-  color: var(--color-win);
+  color: var(--start-game);
 }
 
 .win {
