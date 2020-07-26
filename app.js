@@ -22,10 +22,18 @@ const hiddenPhrases = [
 
 // CORE FUNCTIONS //
 
+const overlayOn = () => {
+    overlay.style.display = '';
+};
+
+const overlayOff = () => {
+    overlay.style.display = 'none';
+};
+
 //array & phrases//
 const getPhrase = (array) => {
-    const randomNumber = Math.floor(Math.random() * array.length);
-    const thePhrase = array[randomNumber];
+    const randomNum = Math.floor(Math.random() * array.length);
+    const thePhrase = array[randomNum];
     const letters = thePhrase.split('').map((x) => { return x.toLowerCase(); });
     return letters;
 };
@@ -37,7 +45,7 @@ const addPhrase = (array) => {
         phraseList.appendChild(list);
         
         if (list.textContent !== ' ') {
-            list.className = 'letters';
+            list.className = 'letter';
         }
         else {
             list.className = 'space'; 
@@ -45,45 +53,15 @@ const addPhrase = (array) => {
     }
 };
 
-const overlayOn = () => {
-    overlay.display.style = ''; 
-};
-
-const overlayOff = () => {
-    overlay.display.style = 'none';
-};
-
-//reset//
-const reset = () =>  {
-    const letters = document.querySelectorAll('.letter');
-    const choice = document.querySelectorAll('.choice');
-    const score = document.querySelectorAll('#scoreboard ol'); 
-    missed = 0; 
-
-    score.innerHTML = '';
-    phraseList.innerHTML = '';
-
-    for (let i = 0; i < 8; i++) {
-        const tries = document.createElement('LI');
-        tries.className = 'tries';
-        tries.innerHTML = '<img src="images/liveHeart.png" height="35" width="30">';
-        score.appendChild(tries); 
-    }
-
-    for (let i = 0; i < choice.length; i++) {
-        choice[i].classList.remove('choice');
-        choice[i].disabled = false; 
-    }
-};
 
 //letter verification//
 const findLetter = (button) => {
-    const letters = document.querySelectorAll('.letters');
+    const letters = document.querySelectorAll('.letter');
     let match = null; 
     for(let i = 0; i < letters.length; i++) {
         let letter = letters[i].textContent; 
 
-        if (button === letter) {
+        if (button == letter) {
             letters[i].classList.add('show');
             match = true;
         }
@@ -93,10 +71,10 @@ const findLetter = (button) => {
 
 //win or lose//
 const win = () => {
-    const title = document.querySelectorAll('.title');
+    const title = document.querySelector('.title');
     const letters = document.querySelectorAll('.letter'); 
     const reveal = document.querySelectorAll('.show');
-    const button = document.querySelectorAll('.btn-reset');
+    const button = document.querySelector('.btn-reset');
     const tries = document.querySelectorAll('.tries');
 
     if (reveal.length === letters.length) {
@@ -113,7 +91,7 @@ const win = () => {
         title.textContent = 'You Lose!';
     }
 
-    button.addEventListener('submit', (e) => {
+    button.addEventListener('click', (e) => {
         if (e.target.className === 'btn-reset') {
             reset();
             overlayOff();
@@ -122,23 +100,48 @@ const win = () => {
     });
 };
 
+//reset//
+const reset = () => {
+    const letters = document.querySelectorAll('.letter');
+    const choice = document.querySelectorAll('.choice');
+    const score = document.querySelector('#scoreboard ol');
+    missed = 0;
+
+    phraseList.innerHTML = '';
+    score.innerHTML = '';
+
+    for (let i = 0; i < 8; i++) {
+        const tries = document.createElement('LI');
+        tries.className = 'tries';
+        tries.innerHTML = '<img src="images/liveHeart.png" height="35" width="30">';
+        score.appendChild(tries);
+    }
+
+    for (let i = 0; i < choice.length; i++) {
+        choice[i].classList.remove('choice');
+        choice[i].disabled = false;
+    }
+};
+
 
 // EVENT LISTENERS //
 
 //start//
 overlay.addEventListener('click', (e) => {
     if (e.target.className === 'btn-reset') {
-        overlay.style.display = 'none';
-    }
+        overlayOff();
+    
 
     overlay.classList.remove('win', 'lose');
 
     addPhrase(getPhrase(hiddenPhrases));
+
+    }
 });
 
 //keyboard//
 document.addEventListener('keydown', (e) => {
-    if(overlay.style.display === 'none') {
+    if (overlay.style.display === 'none') {
         const buttons = document.querySelectorAll('button');
 
         for (let i = 0; i < buttons.length; i++) {
@@ -146,7 +149,7 @@ document.addEventListener('keydown', (e) => {
                 let button = buttons[i].textContent; 
 
                 const matchedLetter = findLetter(button);
-                const score = document.querySelectorAll('#scoreboard ol');
+                const score = document.querySelector('#scoreboard ol');
                 const tries = document.querySelectorAll('.tries');
                 
                 if (matchedLetter === null && buttons[i].disabled === false) {

@@ -80,6 +80,10 @@ button:hover {
   padding: 10px;
 }
 
+.tries {
+  padding: 0 2px; 
+}
+
 /* Title */
 
 .header {
@@ -92,7 +96,7 @@ button:hover {
   margin: 0 auto;
 }
 
-.letters {
+.letter {
   font-size: var(--font-size-medium);
   height: 65px;
   width: 65px;
@@ -107,7 +111,7 @@ button:hover {
 }
 
 .space {
-  width: 15px;
+  width: 20px;
 }
 
 .show {
@@ -197,4 +201,20 @@ button:hover {
 
 .lose a {
   color: var(--color-lose);
+  background: #ffdc26;
+}
+
+.win h2:hover,
+.lose h2:hover {
+ color: #e3a300;
+}
+
+.win a.btn-reset:hover {
+  background: #007ecf;
+  color: #fff;
+}
+
+.lose a.btn-reset:hover {
+  color: var(--color-lose);
+  background: #ffbc26;
 }
