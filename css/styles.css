@@ -7,7 +7,7 @@
 
 :root {
   --start-game: #010E18;
-  --color-win: #78CF82;
+  --color-win: #54daab;
   --color-lose: #D94545;
   --color-start: #1463FF;
   --color-neutral: #445069;
@@ -204,7 +204,10 @@ button:hover {
   background: #ffdc26;
 }
 
-.win h2:hover,
+.win h2:hover {
+  color: #007ecf; 
+}
+
 .lose h2:hover {
  color: #e3a300;
 }

@@ -110,7 +110,7 @@ const reset = () => {
     phraseList.innerHTML = '';
     score.innerHTML = '';
 
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 5; i++) {
         const tries = document.createElement('LI');
         tries.className = 'tries';
         tries.innerHTML = '<img src="images/liveHeart.png" height="35" width="30">';
